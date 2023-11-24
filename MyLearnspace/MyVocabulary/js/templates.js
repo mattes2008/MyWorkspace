@@ -74,6 +74,64 @@ myVocabulary.templates = {
 					this.storage.save();
 				},
 			};
+			this.unit = {
+				create: (user, book, unit, password)=>{
+					let userIndex = this.indexOfName(this.data.users, user);
+					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+					for (let i of this.data.users[userIndex].books[bookIndex].units) {
+						if (i.name===unit) {
+							throw new Error("unit '"+unit+"'does not exist");
+						}
+					}
+					if (this.user.passwordMatch(user, password)) {
+						this.data.users[userIndex].books[bookIndex].units.push(new myVocabulary.templates.Unit(unit));
+					}
+					this.storage.save();
+				},
+				remove: (user, book, unit, password)=>{
+					let userIndex = this.indexOfName(this.data.users, user);
+					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+					for (let i=0; i<this.data.users[userIndex].books[bookIndex].units.lenght; i++) {
+						if (this.data.users[userIndex].books[bookIndex].units[i].name===unit) {
+							if (this.user.passwordMatch(user, password)) {
+								this.data.users[userIndex].books[bookIndex].units.splice(i, 1);
+							}
+						}
+					}
+					this.storage.save();
+					throw new Error("unit '"+unit+"' does not exist");
+				},
+			};
+			this.vocabulary = {
+				create: (user, book, unit, password, source, target)=>{
+					let userIndex = this.indexOfName(this.data.users, user);
+					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+					let unitIndex = this.indexOfName(this.data.users[userIndex].books[bookIndex].units, unit);
+					if (this.user.passwordMatch(user, password)) {
+						this.data.users[userIndex].books[bookIndex].units[unitIndex].vocabulary.push(new myVocabulary.templates.Vocabulary(source, target));
+					}
+					this.storage.save();
+				},
+				remove: (user, book, unit, vocabularyIndex, password)=>{
+					let userIndex = this.indexOfName(this.data.users, user);
+					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+					let unitIndex = this.indexOfName(this.data.users[userIndex].books[bookIndex].units, unit);
+					if (this.user.passwordMatch(user, password)) {
+						this.data.users[userIndex].books[bookIndex].units[unitIndex].vocabulary.splice(vocabularyIndex, 1);
+					}
+					this.storage.save();
+				},
+				change: (user, book, unit, vocabularyIndex, password, source, target)=>{
+					let userIndex = this.indexOfName(this.data.users, user);
+					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+					let unitIndex = this.indexOfName(this.data.users[userIndex].books[bookIndex].units, unit);
+					if (this.user.passwordMatch(user, password)) {
+						this.data.users[userIndex].books[bookIndex].units[unitIndex].vocabulary[vocabularyIndex].source = source;
+						this.data.users[userIndex].books[bookIndex].units[unitIndex].vocabulary[vocabularyIndex].target = target;
+					}
+					this.storage.save();
+				},
+			}
 			this.indexOfName = (array, name)=>{
 				for (let i=0; i<array.length; i++) {
 					if (array[i].name===name) {
@@ -128,4 +186,4 @@ myVocabulary.templates = {
 		}
 	},
 };
-const root = new myVocabulary.templates.Root();
+myVocabulary.root = new myVocabulary.templates.Root();
