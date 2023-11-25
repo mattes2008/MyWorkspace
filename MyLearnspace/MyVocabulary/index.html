@@ -7,11 +7,46 @@
 	<script src="js/scripts.js"></script>
 	<script src="js/handler.js"></script>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/dark.css">
+	<link rel="icon" href="storage/favicon.png">
 </head>
 <body onload="myVocabulary.handler.bodyOnLoad()">
+
+<div class="header"><h1>My Vocabulary</h1></div>
 <div class="screen" id="login">
+	<div class="popupWindow hidden" id="register">
+		<h1 class="popupWindowHeadline">Sign up</h1>
+		<input type="text" class="registerInput" id="register_usernameInput" placeholder="Username">
+		<br>
+		<input type="password" class="registerInput" id="register_passwordInput" placeholder="Password">
+		<br>
+		<input type="password" class="registerInput" id="register_repeatPasswordInput" placeholder="Repeat Password">
+		<br>
+		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.registerCancelButtonOnClick()">Cancel</button>
+		<button class="registerButton agreementButton">Sign up</button>
+		<br>
+		<button class="importButton">Import User</button>
+	</div>
+	<img alt="" class="loginImage" src="storage/title.png">
+	<input type="text" class="loginInput" id="login_usernameInput" placeholder="Username">
+	<br>
+	<input type="password" class="loginInput" id="login_passwordInput" placeholder="Password">
+	<br>
+	<button class="loginButton agreementButton">Sign in</button>
+	<button class="loginButton specialButton" onclick="myVocabulary.handler.loginRegisterButtonOnClick()">Sign up</button>
 </div>
 <div class="screen hidden" id="main">
 </div>
+
+<div class="footer">
+	<hr>
+	<p>Made by:</p>
+	<a href="https://github.com/mattes2008" target="_blank">mattes2008</a>
+	<a href="https://github.com/mattes2008/MyWorkspace" target="_blank">MyWorkspace</a>
+	<br>
+	<br>
+	<hr>
+</div>
+
 </body>
 </html>

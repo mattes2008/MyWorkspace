@@ -7,4 +7,13 @@ myVocabulary.handler = {
 			myVocabulary.root.storage.load();
 		}
 	},
+	loginRegisterButtonOnClick: ()=>{
+		document.getElementById("register_usernameInput").value = "";
+		document.getElementById("register_passwordInput").value = "";
+		document.getElementById("register_repeatPasswordInput").value = "";
+		myVocabulary.scripts.showPopupWindow(document.getElementById("register"));
+	},
+	registerCancelButtonOnClick: ()=>{
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
+	},
 };

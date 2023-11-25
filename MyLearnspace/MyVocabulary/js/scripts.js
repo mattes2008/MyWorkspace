@@ -8,4 +8,10 @@ myVocabulary.scripts = {
 			}
 		}
 	},
+	hidePopupWindow: (element)=>{
+		element.classList.add("hidden");
+	},
+	showPopupWindow: (element)=>{
+		element.classList.remove("hidden");
+	},
 };
