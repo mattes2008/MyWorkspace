@@ -5,6 +5,11 @@ myVocabulary.templates = {
 			this.data = {
 				localStoragePermission: false,
 				users: [],
+				temporal: {
+					user: "",
+					book: "",
+					unit: "",
+				},
 			};
 			this.storage = {
 				save: ()=>{
@@ -91,7 +96,7 @@ myVocabulary.templates = {
 				remove: (user, book, unit, password)=>{
 					let userIndex = this.indexOfName(this.data.users, user);
 					let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
-					for (let i=0; i<this.data.users[userIndex].books[bookIndex].units.lenght; i++) {
+					for (let i=0; i<this.data.users[userIndex].books[bookIndex].units.length; i++) {
 						if (this.data.users[userIndex].books[bookIndex].units[i].name===unit) {
 							if (this.user.passwordMatch(user, password)) {
 								this.data.users[userIndex].books[bookIndex].units.splice(i, 1);
@@ -99,7 +104,6 @@ myVocabulary.templates = {
 						}
 					}
 					this.storage.save();
-					throw new Error("unit '"+unit+"' does not exist");
 				},
 			};
 			this.vocabulary = {
@@ -131,12 +135,17 @@ myVocabulary.templates = {
 					}
 					this.storage.save();
 				},
-			}
+			};
 			this.indexOfName = (array, name)=>{
 				for (let i=0; i<array.length; i++) {
 					if (array[i].name===name) {
 						return i;
 					}
+				}
+			};
+			this.login = (user, password)=>{
+				if (this.user.passwordMatch(user, password)) {
+
 				}
 			};
 		}
