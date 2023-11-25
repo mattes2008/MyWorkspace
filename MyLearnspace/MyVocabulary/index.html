@@ -23,7 +23,7 @@
 		<input type="password" class="registerInput" id="register_repeatPasswordInput" placeholder="Repeat Password">
 		<br>
 		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.registerCancelButtonOnClick()">Cancel</button>
-		<button class="registerButton agreementButton">Sign up</button>
+		<button class="registerButton agreementButton" onclick="myVocabulary.handler.registerSignupButtonOnClick()">Sign up</button>
 		<br>
 		<button class="importButton">Import User</button>
 	</div>
@@ -32,7 +32,7 @@
 	<br>
 	<input type="password" class="loginInput" id="login_passwordInput" placeholder="Password">
 	<br>
-	<button class="loginButton agreementButton">Sign in</button>
+	<button class="loginButton agreementButton" onclick="myVocabulary.handler.loginSignInButtonOnClick()">Sign in</button>
 	<button class="loginButton specialButton" onclick="myVocabulary.handler.loginRegisterButtonOnClick()">Sign up</button>
 </div>
 <div class="screen hidden" id="main">

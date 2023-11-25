@@ -13,7 +13,18 @@ myVocabulary.handler = {
 		document.getElementById("register_repeatPasswordInput").value = "";
 		myVocabulary.scripts.showPopupWindow(document.getElementById("register"));
 	},
+	loginSignInButtonOnClick: ()=>{
+    		let username = document.getElementById("login_usernameInput").value;
+    		let password = document.getElementById("login_passwordInput").value;
+    		myVocabulary.root.login(username, password);
+    	},
 	registerCancelButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
+	},
+	registerSignupButtonOnClick: ()=>{
+		let username = document.getElementById("register_usernameInput").value;
+		let password = document.getElementById("register_passwordInput").value;
+		let repeatPassword = document.getElementById("register_repeatPasswordInput").value;
+		myVocabulary.root.register(username, password, repeatPassword);
 	},
 };

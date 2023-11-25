@@ -145,7 +145,17 @@ myVocabulary.templates = {
 			};
 			this.login = (user, password)=>{
 				if (this.user.passwordMatch(user, password)) {
-
+					alert("Name: "+user+"\nPassword: "+password);
+				}
+			};
+			this.register = (user, password, repeatPassword)=>{
+				if (password===repeatPassword) {
+					try {
+						this.user.create(user, password);
+					} catch (e) {
+						throw new Error("login has been terminated");
+					}
+					this.login(user, password);
 				}
 			};
 		}
