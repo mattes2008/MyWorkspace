@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>MyVocabulary</title>
 	<script src="js/templates.js"></script>
+	<script src="js/ui.js"></script>
 	<script src="js/scripts.js"></script>
 	<script src="js/handler.js"></script>
 	<link rel="stylesheet" href="css/style.css">
@@ -16,21 +17,34 @@
 <div class="screen" id="login">
 	<div class="popupWindow hidden" id="register">
 		<h1 class="popupWindowHeadline">Sign up</h1>
-		<input type="text" class="registerInput" id="register_usernameInput" placeholder="Username">
-		<br>
-		<input type="password" class="registerInput" id="register_passwordInput" placeholder="Password">
-		<br>
-		<input type="password" class="registerInput" id="register_repeatPasswordInput" placeholder="Repeat Password">
+		<label>
+			<input type="text" class="registerInput" id="register_usernameInput" placeholder="Username">
+			<br>
+			<input type="password" class="registerInput" id="register_passwordInput" placeholder="Password">
+			<br>
+			<input type="password" class="registerInput" id="register_repeatPasswordInput" placeholder="Repeat Password">
+		</label>
 		<br>
 		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.registerCancelButtonOnClick()">Cancel</button>
 		<button class="registerButton agreementButton" onclick="myVocabulary.handler.registerSignupButtonOnClick()">Sign up</button>
 		<br>
-		<button class="importButton">Import User</button>
+		<button class="importButton" onclick="myVocabulary.handler.registerImportUserButtonOnClick()">Import User</button>
+	</div>
+	<div class="popupWindow hidden" id="importUser">
+		<h1 class="popupWindowHeadline">Import User</h1>
+		<label>
+			<textarea id="importUserTextArea" class="importUserTextArea" placeholder="JSON"></textarea>
+		</label>
+		<br>
+		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.userImportCancelButton()">Cancel</button>
+		<button class="registerButton agreementButton" onclick="myVocabulary.handler.userImportImportButton()">Import</button>
 	</div>
 	<img alt="" class="loginImage" src="storage/title.png">
-	<input type="text" class="loginInput" id="login_usernameInput" placeholder="Username">
-	<br>
-	<input type="password" class="loginInput" id="login_passwordInput" placeholder="Password">
+	<label>
+		<input type="text" class="loginInput" id="login_usernameInput" placeholder="Username">
+		<br>
+		<input type="password" class="loginInput" id="login_passwordInput" placeholder="Password">
+	</label>
 	<br>
 	<button class="loginButton agreementButton" onclick="myVocabulary.handler.loginSignInButtonOnClick()">Sign in</button>
 	<button class="loginButton specialButton" onclick="myVocabulary.handler.loginRegisterButtonOnClick()">Sign up</button>

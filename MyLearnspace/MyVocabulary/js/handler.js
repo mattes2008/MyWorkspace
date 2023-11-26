@@ -27,4 +27,23 @@ myVocabulary.handler = {
 		let repeatPassword = document.getElementById("register_repeatPasswordInput").value;
 		myVocabulary.root.register(username, password, repeatPassword);
 	},
+	registerImportUserButtonOnClick: ()=>{
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
+		myVocabulary.scripts.showPopupWindow(document.getElementById("importUser"));
+		document.getElementById("importUserTextArea").value = "";
+	},
+	userImportCancelButton: ()=>{
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("importUser"));
+		myVocabulary.scripts.showPopupWindow(document.getElementById("register"));
+	},
+	userImportImportButton: ()=>{
+		let jsonString = document.getElementById("importUserTextArea").value;
+		try {
+			myVocabulary.root.user.import(jsonString);
+		} catch (e) {
+			throw new Error("import has been terminated");
+		}
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("importUser"));
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
+	},
 };

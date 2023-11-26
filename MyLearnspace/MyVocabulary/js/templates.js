@@ -53,6 +53,27 @@ myVocabulary.templates = {
 					}
 					throw new Error("user '"+name+"' does not exist");
 				},
+				import: (jsonString)=>{
+					let userObject = JSON.parse(jsonString);
+					let requiredItems = ["books", "name", "password", "statistic", "type"];
+					for (let i in userObject) {
+						for (let j=0; j<requiredItems.length; j++) {
+							if (requiredItems[j]===i) {
+								requiredItems.splice(j, 1);
+							}
+						}
+					}
+					if (requiredItems.length>0) {
+						throw new Error("import has been terminated");
+					}
+					for (let i of myVocabulary.root.data.users) {
+						if (i.name===userObject.name) {
+							throw new Error("import has been terminated");
+						}
+					}
+					myVocabulary.root.data.users.push(userObject);
+					this.storage.save();
+				},
 			};
 			this.book = {
 				create: (user, book, password)=>{
