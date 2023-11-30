@@ -74,9 +74,30 @@ myVocabulary.templates = {
 					myVocabulary.root.data.users.push(userObject);
 					this.storage.save();
 				},
+				language: {
+					add: (user, name, color, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						for (let i of this.data.users[userIndex].languages) {
+							if (i===name) {
+								throw new Error("language '"+name+"' does already exist");
+							}
+						}
+						if (this.user.passwordMatch(user, password)) {
+							this.data.users[userIndex].languages.push(new Language(name, color));
+						}
+					},
+					remove: (user, name, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						for (let i=0; i<this.data.users[userIndex].languages.length; i++) {
+							if (this.data.users[userIndex].languages[i].name===name) {
+								this.data.users[userIndex].languages.splice(i, 1);
+							}
+						}
+					},
+				},
 			};
 			this.book = {
-				create: (user, book, password)=>{
+				create: (user, book, password, sourceLanguage, targetLanguage)=>{
 					let userIndex = this.indexOfName(this.data.users, user);
 					for (let i of this.data.users[userIndex].books) {
 						if (i.name===book) {
@@ -84,7 +105,7 @@ myVocabulary.templates = {
 						}
 					}
 					if (this.user.passwordMatch(user, password)) {
-						this.data.users[userIndex].books.push(new myVocabulary.templates.Book(book));
+						this.data.users[userIndex].books.push(new myVocabulary.templates.Book(book, sourceLanguage, targetLanguage));
 					}
 					this.storage.save();
 				},
@@ -188,12 +209,17 @@ myVocabulary.templates = {
 			this.type = "user";
 			this.books = [];
 			this.statistic = new myVocabulary.templates.Statistic();
+			this.languages = [];
 		}
 	},
 	Book: class {
-		constructor(name) {
+		constructor(name, sourceLanguage, targetLanguage) {
 			this.name = name;
 			this.type = "book";
+			this.language = {
+				source: sourceLanguage,
+				target: targetLanguage,
+			};
 			this.units = [];
 			this.statistic = new myVocabulary.templates.Statistic();
 		}
@@ -223,6 +249,12 @@ myVocabulary.templates = {
 			this.percentage = ()=>{
 				return (this.tries.passed/this.tries.total)*100
 			};
+		}
+	},
+	Language: class {
+		constructor(name, color) {
+			this.name = name;
+			this.color = color;
 		}
 	},
 };

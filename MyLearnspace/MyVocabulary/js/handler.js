@@ -14,10 +14,11 @@ myVocabulary.handler = {
 		myVocabulary.scripts.showPopupWindow(document.getElementById("register"));
 	},
 	loginSignInButtonOnClick: ()=>{
-    		let username = document.getElementById("login_usernameInput").value;
-    		let password = document.getElementById("login_passwordInput").value;
-    		myVocabulary.root.login(username, password);
-    	},
+		let username = document.getElementById("login_usernameInput").value;
+		let password = document.getElementById("login_passwordInput").value;
+		myVocabulary.root.login(username, password);
+		myVocabulary.scripts.changeScreen("main");
+	},
 	registerCancelButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
 	},
@@ -26,6 +27,7 @@ myVocabulary.handler = {
 		let password = document.getElementById("register_passwordInput").value;
 		let repeatPassword = document.getElementById("register_repeatPasswordInput").value;
 		myVocabulary.root.register(username, password, repeatPassword);
+		myVocabulary.scripts.changeScreen("main");
 	},
 	registerImportUserButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
