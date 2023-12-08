@@ -6,5 +6,5 @@ body {
 }
 .overviewTable {
 	background-color: red;
-	border: thin solid red;
+	border: 5px solid red;
 }

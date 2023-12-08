@@ -30,7 +30,7 @@ myVocabulary.ui = {
 					this.index.push(newIndex);
 				}
 			}
-			this.createContainer = this.element.appendChild(document.createElement("div"));
+			this.createContainer = this.element.appendChild(document.createElement("h2"));
 			this.createContainer.classList.add("overviewTableCreateContainer");
 			this.createContainer.addEventListener("click", this.onCreate);
 			this.createContainer.innerText = "+";

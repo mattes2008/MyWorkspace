@@ -14,6 +14,17 @@
 <body onload="myVocabulary.handler.bodyOnLoad()">
 
 <div class="header"><h1>My Vocabulary</h1></div>
+<div class="sidebar hidden" id="sidebar">
+	<img alt="" class="sidebarTitle" src="storage/title.png">
+	<div class="sidebarIndexContainer">
+		<div class="sidebarIndex">
+			<h1 class="sidebarIndexSymbol" style="color: blue;">_<&nbsp;&nbsp;&nbsp;Terminal</h1>
+		</div>
+		<div class="sidebarIndex">
+			<h1 class="sidebarIndexSymbol" style="color: red;">&Cross;&nbsp;&nbsp;&nbsp;Back</h1>
+		</div>
+	</div>
+</div>
 <div class="screen" id="login">
 	<div class="popupWindow hidden" id="register">
 		<h1 class="popupWindowHeadline">Sign up</h1>
@@ -50,6 +61,15 @@
 	<button class="loginButton specialButton" onclick="myVocabulary.handler.loginRegisterButtonOnClick()">Sign up</button>
 </div>
 <div class="screen hidden" id="main">
+	<h1 class="screenHeadline">Book Overview</h1>
+	<div class="structureSelectContainer">
+		<label for="main_structureSelect">
+			<select class="structureSelect" id="main_structureSelect" onchange="myVocabulary.handler.mainStructureSelectOnSelect(this)">
+				<option value="all">Sort by: All</option>
+				<option value="language">Sort by: Language</option>
+			</select>
+		</label>
+	</div>
 	<div id="main_overviewTableContainer"></div>
 </div>
 

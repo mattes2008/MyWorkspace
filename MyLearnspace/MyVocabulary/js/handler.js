@@ -6,6 +6,14 @@ myVocabulary.handler = {
 		} else {
 			myVocabulary.root.storage.load();
 		}
+		document.addEventListener("keyup", (event)=>{
+			myVocabulary.handler.onKeyUp(event);
+		});
+	},
+	onKeyUp: (event)=>{
+		if (event.key==="Escape") {
+			myVocabulary.scripts.toggleSidebar();
+		}
 	},
 	loginRegisterButtonOnClick: ()=>{
 		document.getElementById("register_usernameInput").value = "";
@@ -16,8 +24,11 @@ myVocabulary.handler = {
 	loginSignInButtonOnClick: ()=>{
 		let username = document.getElementById("login_usernameInput").value;
 		let password = document.getElementById("login_passwordInput").value;
-		myVocabulary.root.login(username, password);
-		myVocabulary.scripts.changeScreen("main");
+		if (myVocabulary.root.user.passwordMatch(username, password)) {
+			myVocabulary.root.login(username, password);
+			myVocabulary.scripts.changeScreen("main");
+			myVocabulary.scripts.createBookOverview(myVocabulary.root.data.temporal.user, "all", password);
+		}
 	},
 	registerCancelButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
@@ -28,6 +39,7 @@ myVocabulary.handler = {
 		let repeatPassword = document.getElementById("register_repeatPasswordInput").value;
 		myVocabulary.root.register(username, password, repeatPassword);
 		myVocabulary.scripts.changeScreen("main");
+		myVocabulary.scripts.createBookOverview(myVocabulary.root.data.temporal.user, "all", password);
 	},
 	registerImportUserButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
@@ -47,5 +59,8 @@ myVocabulary.handler = {
 		}
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("importUser"));
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("register"));
+	},
+	mainStructureSelectOnSelect: (src)=>{
+		myVocabulary.scripts.createBookOverview(myVocabulary.root.data.temporal.user, src.value, myVocabulary.root.data.temporal.password);
 	},
 };

@@ -9,6 +9,7 @@ myVocabulary.templates = {
 					user: "",
 					book: "",
 					unit: "",
+					password: "",
 				},
 			};
 			this.storage = {
@@ -83,7 +84,7 @@ myVocabulary.templates = {
 							}
 						}
 						if (this.user.passwordMatch(user, password)) {
-							this.data.users[userIndex].languages.push(new Language(name, color));
+							this.data.users[userIndex].languages.push(new myVocabulary.templates.Language(name, color));
 						}
 					},
 					remove: (user, name, password)=>{
@@ -92,6 +93,18 @@ myVocabulary.templates = {
 							if (this.data.users[userIndex].languages[i].name===name) {
 								this.data.users[userIndex].languages.splice(i, 1);
 							}
+						}
+					},
+					list: (user, language, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						let result = [];
+						for (let i of this.data.users[userIndex].books) {
+							if (i.language.source===language || i.language.target===language) {
+								result.push(i);
+							}
+						}
+						if (this.user.passwordMatch(user, password)) {
+							return result;
 						}
 					},
 				},
@@ -188,6 +201,8 @@ myVocabulary.templates = {
 			this.login = (user, password)=>{
 				if (this.user.passwordMatch(user, password)) {
 					alert("Name: "+user+"\nPassword: "+password);
+					this.data.temporal.user = user;
+					this.data.temporal.password = password;
 				}
 			};
 			this.register = (user, password, repeatPassword)=>{
@@ -200,6 +215,7 @@ myVocabulary.templates = {
 					this.login(user, password);
 				}
 			};
+			this.accessBook = (user, book, password)=>{};
 		}
 	},
 	User: class {
