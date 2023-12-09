@@ -20,7 +20,7 @@
 		<div class="sidebarIndex">
 			<h1 class="sidebarIndexSymbol" style="color: blue;">_<&nbsp;&nbsp;&nbsp;Terminal</h1>
 		</div>
-		<div class="sidebarIndex">
+		<div class="sidebarIndex" onclick="document.getElementById('sidebar').classList.add('hidden')">
 			<h1 class="sidebarIndexSymbol" style="color: red;">&Cross;&nbsp;&nbsp;&nbsp;Back</h1>
 		</div>
 	</div>
@@ -67,6 +67,7 @@
 			<select class="structureSelect" id="main_structureSelect" onchange="myVocabulary.handler.mainStructureSelectOnSelect(this)">
 				<option value="all">Sort by: All</option>
 				<option value="language">Sort by: Language</option>
+				<option value="tag">Sort by: Tag</option>
 			</select>
 		</label>
 	</div>

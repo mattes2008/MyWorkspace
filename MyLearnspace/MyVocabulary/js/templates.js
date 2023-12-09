@@ -108,6 +108,42 @@ myVocabulary.templates = {
 						}
 					},
 				},
+				tag: {
+					add: (user, name, color, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						for (let i of this.data.users[userIndex].tags) {
+							if (i===name) {
+								throw new Error("language '"+name+"' does already exist");
+							}
+						}
+						if (this.user.passwordMatch(user, password)) {
+							this.data.users[userIndex].tags.push(new myVocabulary.templates.Tag(name, color));
+						}
+					},
+					remove: (user, name, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						for (let i=0; i<this.data.users[userIndex].tags.length; i++) {
+							if (this.data.users[userIndex].tags[i].name===name) {
+								this.data.users[userIndex].tags.splice(i, 1);
+							}
+						}
+					},
+					list: (user, tag, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						let result = [];
+						for (let i of this.data.users[userIndex].books) {
+							for (let j of i.tags) {
+								if (j===tag) {
+									result.push(i);
+									break;
+								}
+							}
+						}
+						if (this.user.passwordMatch(user, password)) {
+							return result;
+						}
+					},
+				},
 			};
 			this.book = {
 				create: (user, book, password, sourceLanguage, targetLanguage)=>{
@@ -132,6 +168,29 @@ myVocabulary.templates = {
 						}
 					}
 					this.storage.save();
+				},
+				tag: {
+					add: (user, book, name, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+						for (let i of this.data.users[userIndex].books[bookIndex].tags) {
+							if (i===name) {
+								throw new Error("book already contains property '"+name+"'");
+							}
+						}
+						if (this.user.passwordMatch(user, password)) {
+							this.data.users[userIndex].books[bookIndex].tags.push(name);
+						}
+					},
+					remove: (user, book, name, password)=>{
+						let userIndex = this.indexOfName(this.data.users, user);
+						let bookIndex = this.indexOfName(this.data.users[userIndex].books, book);
+						for (let i=0; i<this.data.users[userIndex].books[bookIndex].tags.length; i++) {
+							if (this.data.users[userIndex].books[bookIndex].tags[i]===name) {
+								this.data.users[userIndex].books[bookIndex].tags.splice(i, 1);
+							}
+						}
+					},
 				},
 			};
 			this.unit = {
@@ -226,6 +285,7 @@ myVocabulary.templates = {
 			this.books = [];
 			this.statistic = new myVocabulary.templates.Statistic();
 			this.languages = [];
+			this.tags = [];
 		}
 	},
 	Book: class {
@@ -238,6 +298,7 @@ myVocabulary.templates = {
 			};
 			this.units = [];
 			this.statistic = new myVocabulary.templates.Statistic();
+			this.tags = [];
 		}
 	},
 	Unit: class {
@@ -268,6 +329,12 @@ myVocabulary.templates = {
 		}
 	},
 	Language: class {
+		constructor(name, color) {
+			this.name = name;
+			this.color = color;
+		}
+	},
+	Tag: class {
 		constructor(name, color) {
 			this.name = name;
 			this.color = color;

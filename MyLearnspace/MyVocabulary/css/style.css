@@ -44,17 +44,16 @@
 	margin-top: 5%;
 }
 .sidebarIndexContainer {
-	overflow-y: scroll;
-	height: 75%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 60%;
 }
 .sidebarIndex {
-	width: 100%;
 	border: thin solid grey;
-	text-align: left;
+	text-align: center;
 }
 .sidebarIndexSymbol {
 	color: black;
-	margin-left: 1em;
 }
 .agreementButton {
 	background-color: green;
@@ -80,7 +79,7 @@ a {
 }
 .overviewTableIndexContainer {
 	background-color: white;
-	overflow-y: scroll;
+	overflow-y: auto;
 	max-height: 50%;
 	aspect-ratio: 3/1;
 }
