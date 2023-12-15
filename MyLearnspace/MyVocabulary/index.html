@@ -61,6 +61,21 @@
 	<button class="loginButton specialButton" onclick="myVocabulary.handler.loginRegisterButtonOnClick()">Sign up</button>
 </div>
 <div class="screen hidden" id="main">
+	<div class="popupWindow hidden" id="createBook">
+		<h1 class="popupWindowHeadline">Create book...</h1>
+		<label>
+			<input type="text" class="registerInput" id="main_nameInput" placeholder="Name">
+			<br>
+			<input type="password" class="registerInput" id="main_sourceLanguageInput" placeholder="Source Language">
+			<br>
+			<input type="password" class="registerInput" id="main_targetLanguageInput" placeholder="Target Language">
+		</label>
+		<br>
+		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.createBookCancelButtonOnClick()">Cancel</button>
+		<button class="registerButton agreementButton" onclick="">Create</button>
+		<br>
+		<button class="importButton" onclick="myVocabulary.handler.registerImportUserButtonOnClick()">Import User</button>
+	</div>
 	<h1 class="screenHeadline">Book Overview</h1>
 	<div class="structureSelectContainer">
 		<label for="main_structureSelect">

@@ -86,6 +86,7 @@ myVocabulary.templates = {
 						if (this.user.passwordMatch(user, password)) {
 							this.data.users[userIndex].languages.push(new myVocabulary.templates.Language(name, color));
 						}
+						this.storage.save();
 					},
 					remove: (user, name, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
@@ -94,6 +95,7 @@ myVocabulary.templates = {
 								this.data.users[userIndex].languages.splice(i, 1);
 							}
 						}
+						this.storage.save();
 					},
 					list: (user, language, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
@@ -112,13 +114,14 @@ myVocabulary.templates = {
 					add: (user, name, color, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
 						for (let i of this.data.users[userIndex].tags) {
-							if (i===name) {
+							if (i.name===name) {
 								throw new Error("language '"+name+"' does already exist");
 							}
 						}
 						if (this.user.passwordMatch(user, password)) {
 							this.data.users[userIndex].tags.push(new myVocabulary.templates.Tag(name, color));
 						}
+						this.storage.save();
 					},
 					remove: (user, name, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
@@ -127,6 +130,7 @@ myVocabulary.templates = {
 								this.data.users[userIndex].tags.splice(i, 1);
 							}
 						}
+						this.storage.save();
 					},
 					list: (user, tag, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
@@ -181,6 +185,7 @@ myVocabulary.templates = {
 						if (this.user.passwordMatch(user, password)) {
 							this.data.users[userIndex].books[bookIndex].tags.push(name);
 						}
+						this.storage.save();
 					},
 					remove: (user, book, name, password)=>{
 						let userIndex = this.indexOfName(this.data.users, user);
@@ -190,6 +195,7 @@ myVocabulary.templates = {
 								this.data.users[userIndex].books[bookIndex].tags.splice(i, 1);
 							}
 						}
+						this.storage.save();
 					},
 				},
 			};
@@ -259,7 +265,6 @@ myVocabulary.templates = {
 			};
 			this.login = (user, password)=>{
 				if (this.user.passwordMatch(user, password)) {
-					alert("Name: "+user+"\nPassword: "+password);
 					this.data.temporal.user = user;
 					this.data.temporal.password = password;
 				}

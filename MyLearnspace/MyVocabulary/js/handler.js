@@ -63,4 +63,13 @@ myVocabulary.handler = {
 	mainStructureSelectOnSelect: (src)=>{
 		myVocabulary.scripts.createBookOverview(myVocabulary.root.data.temporal.user, src.value, myVocabulary.root.data.temporal.password);
 	},
+	bookOverviewCreateButtonOnClick: ()=>{
+		document.getElementById("main_nameInput").value = "";
+		document.getElementById("main_sourceLanguageInput").value = "";
+		document.getElementById("main_targetLanguageInput").value = "";
+		myVocabulary.scripts.showPopupWindow(document.getElementById("createBook"));
+	},
+	createBookCancelButtonOnClick: ()=>{
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("createBook"));
+	},
 };
