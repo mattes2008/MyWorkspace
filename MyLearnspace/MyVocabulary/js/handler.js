@@ -64,10 +64,17 @@ myVocabulary.handler = {
 		myVocabulary.scripts.createBookOverview(myVocabulary.root.data.temporal.user, src.value, myVocabulary.root.data.temporal.password);
 	},
 	bookOverviewCreateButtonOnClick: ()=>{
-		document.getElementById("main_nameInput").value = "";
-		document.getElementById("main_sourceLanguageInput").value = "";
-		document.getElementById("main_targetLanguageInput").value = "";
+		document.getElementById("createBook_nameInput").value = "";
+		document.getElementById("createBook_sourceLanguageInput").value = "";
+		document.getElementById("createBook_targetLanguageInput").value = "";
 		myVocabulary.scripts.showPopupWindow(document.getElementById("createBook"));
+	},
+	createBookCreateButtonOnClick: ()=>{
+		let book = document.getElementById("createBook_nameInput").value;
+		let sourceLanguage = document.getElementById("createBook_sourceLanguageInput").value;
+		let targetLanguage = document.getElementById("createBook_targetLanguageInput").value;
+		myVocabulary.root.book.create(myVocabulary.root.data.temporal.user, book, myVocabulary.root.data.temporal.password, sourceLanguage, targetLanguage);
+		myVocabulary.scripts.hidePopupWindow(document.getElementById("createBook"));
 	},
 	createBookCancelButtonOnClick: ()=>{
 		myVocabulary.scripts.hidePopupWindow(document.getElementById("createBook"));

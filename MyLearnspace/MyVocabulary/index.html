@@ -64,18 +64,19 @@
 	<div class="popupWindow hidden" id="createBook">
 		<h1 class="popupWindowHeadline">Create book...</h1>
 		<label>
-			<input type="text" class="registerInput" id="main_nameInput" placeholder="Name">
+			<input type="text" class="registerInput" id="createBook_nameInput" placeholder="Name">
 			<br>
-			<input type="password" class="registerInput" id="main_sourceLanguageInput" placeholder="Source Language">
+			<input type="text" class="registerInput" id="createBook_sourceLanguageInput" placeholder="Source Language">
 			<br>
-			<input type="password" class="registerInput" id="main_targetLanguageInput" placeholder="Target Language">
+			<input type="text" class="registerInput" id="createBook_targetLanguageInput" placeholder="Target Language">
 		</label>
 		<br>
 		<button class="registerButton disagreementButton" onclick="myVocabulary.handler.createBookCancelButtonOnClick()">Cancel</button>
-		<button class="registerButton agreementButton" onclick="">Create</button>
+		<button class="registerButton agreementButton" onclick="myVocabulary.handler.createBookCreateButtonOnClick()">Create</button>
 		<br>
 		<button class="importButton" onclick="myVocabulary.handler.registerImportUserButtonOnClick()">Import User</button>
 	</div>
+	<br/>
 	<h1 class="screenHeadline">Book Overview</h1>
 	<div class="structureSelectContainer">
 		<label for="main_structureSelect">
